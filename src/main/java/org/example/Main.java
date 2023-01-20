@@ -57,8 +57,8 @@ public class Main {
         double[] array = new double[length];
         double progressX = startX;
         int i = 0;
-
-        while (progressX<= endX){
+//added percentage according that double is not exact value
+        while (progressX<= endX*1.001){
             array[i] = progressX;
             i++;
             progressX+= deltaX;

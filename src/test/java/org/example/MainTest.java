@@ -3,10 +3,10 @@ package org.example;
 import org.assertj.core.data.Percentage;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-//import org.junit.jupiter.params.ParameterizedTest;
-//import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
-import javax.management.ConstructorParameters;
+//import javax.management.ConstructorParameters;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -48,17 +48,23 @@ class MainTest {
 
     @Test
     void testGenerateArray() {
-        double[] array = main.generateArray(0.0,0.016,0.002);
-        assertThat(array[8]).isCloseTo(0.016,Percentage.withPercentage(0.001));
+        double[] array = main.generateArray(0.0,0.032,0.002);
+        assertThat(array[16]).isCloseTo(0.032,Percentage.withPercentage(0.001));
     }
 
     @Test
-    void calculateArray() {
+    void testCalculateArray() {
+        double[] array = {1.4,1,1.7};
+        double third = main.calculateArray(array)[2];
+        assertThat(third).isCloseTo(1.11,Percentage.withPercentage(0.05));
+
     }
 
-    @Test
-    void testCalculateFunction() {
-        assertThat(main.calculateFunction(1.4)).isCloseTo(3.65,Percentage.withPercentage(0.1));
+
+    @ParameterizedTest
+    @CsvSource({"1.4, 3.65","0.0, 4","2.0, 0.93915"})
+    void testCalculateFunction(double input, double expected) {
+        assertThat(main.calculateFunction(input)).isCloseTo(expected,Percentage.withPercentage(0.05));
     }
 
 }
