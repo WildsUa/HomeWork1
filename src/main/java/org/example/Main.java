@@ -2,6 +2,10 @@ package org.example;
 
 
 public class Main {
+    private int normalizeItem (double item){
+        return (int) Math.round(item*1000);
+    }
+
     private void printMin(double[] array){
         int pos = arrayMin(array);
         System.out.println("Min value = " + array[pos]);
@@ -92,9 +96,9 @@ public class Main {
         return (a+b*X)/Math.sqrt(Math.pow(X,2) + 1);
     }
     public double calculateFunction(double X){
-        if (X<1.4){
+        if (normalizeItem(X)<1.4*1000){
             return calculateFirst(X);
-        } else if (X == 1.4) {
+        } else if (normalizeItem(X) == 1.4*1000) {
             return calculateSecond(X);
         } else {
             return calculateThird(X);
